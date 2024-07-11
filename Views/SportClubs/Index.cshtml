@@ -1,0 +1,81 @@
+﻿@model Lab5.ViewModels.NewsViewModel
+
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "SportClubs Index";
+}
+
+<h1>SportClubs Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.SportClubs.FirstOrDefault().Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SportClubs.FirstOrDefault().Fee)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SportClubs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fee)
+                </td>
+                <td>
+                    <a asp-action="Index" asp-route-id="@item.Id">Select</a> |
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.Fans != null && Model.Fans.Any())
+{
+    <h3>Subscribed Fans:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fans.FirstOrDefault().LastName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fans.FirstOrDefault().FirstName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fans.FirstOrDefault().BirthDate)
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var fan in Model.Fans)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => fan.LastName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => fan.FirstName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => fan.BirthDate)
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
